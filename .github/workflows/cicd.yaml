@@ -1,36 +1,35 @@
-name: Flutter CI
+name: Flutter CI/CD
 
 on:
   push:
     branches:
-      - main
+      - main  # Trigger on push to the main branch
   pull_request:
     branches:
-      - main
+      - main  # Trigger on pull requests to the main branch
 
 jobs:
   build:
+    name: Build and Test
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the code
+      # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Flutter
-      - name: Set up Flutter
+      # Setup Flutter
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 'stable'
 
-      # Step 3: Install dependencies
+      # Install dependencies
       - name: Install dependencies
         run: flutter pub get
 
-      # # Step 4: Run Flutter analyzer
-      # - name: Analyze code
-      #   run: flutter analyze
+      # Run tests
+      - name: Run tests
+        run: flutter test
 
-      # # Step 5: Run tests
-      # - name: Run tests
-      #   run: flutter test
+  # Example: Add more jobs for deployment (optional)
